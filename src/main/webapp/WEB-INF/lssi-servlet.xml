@@ -40,7 +40,7 @@
 
 
 	<!-- Controllers -->
-        <bean id="locationController" class="com.motbot.mtms.das.controller.LocationController">
+        <bean id="luminaireController" class="com.sfu.lssi.controller.LuminaireController">
         </bean>
 
 <!--
