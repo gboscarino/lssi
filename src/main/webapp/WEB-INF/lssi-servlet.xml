@@ -42,6 +42,8 @@
 	<!-- Controllers -->
         <bean id="luminaireController" class="com.sfu.lssi.controller.LuminaireController">
         </bean>
+        <bean id="illuminanceSensorController" class="com.sfu.lssi.controller.IlluminanceSensorController">
+        </bean>
 
 <!--
         <bean id="clientController" class="com.motbot.mtms.das.controller.ClientController">
@@ -51,9 +53,9 @@
 -->
 
 	<!-- Services -->
-<!--
-        <bean id="locationService" class="com.motbot.mtms.das.service.impl.LocationServiceImpl">
+        <bean id="luminaireService" class="com.sfu.lssi.service.impl.LuminaireServiceImpl">
         </bean>
+<!--
         <bean id="clientService" class="com.motbot.mtms.das.service.impl.ClientServiceImpl">
         </bean>
         <bean id="productService" class="com.motbot.mtms.das.service.impl.ProductServiceImpl">

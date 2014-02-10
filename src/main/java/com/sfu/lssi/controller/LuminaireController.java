@@ -1,6 +1,8 @@
 package com.sfu.lssi.controller;
 
 
+
+import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -11,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.sfu.lssi.data.Event;
-//import com.lssi.data.Sensor;
-import com.sfu.lssi.data.Luminaire;
+import com.sfu.lssi.data.PowerLevelEvent;
 import com.sfu.lssi.data.Payload;
+import com.sfu.lssi.service.LuminaireService;
 
 
 
@@ -27,29 +28,31 @@ import com.sfu.lssi.data.Payload;
 public class LuminaireController {
 	
 	private static final Logger logger = Logger.getLogger(LuminaireController.class);
+	private LuminaireService luminaireService;
 	
-	public LuminaireController() {
+	@Inject
+	public LuminaireController(LuminaireService pLuminaireService ) {
+		this.luminaireService = pLuminaireService;
 	}
-	
-	//private LuminaireResolver resolver;
-	//public LuminaireResolver getResolver() { return this.resolver; }
-	//public void setResolver(LuminaireResolver resolver) { this.resolver = resolver; }
-	
-	
+
 	/**
-	 * Method to create a new client.
+	 * Method to create a new power level event.
 	 * 
-	 * @param  The client object
-	 * @return The Client object (only the client bKey).
+	 * The event is used to change the power level of a set of luminaires 
+	 * (light fixtures).
+	 * 
+	 * @param  PowerLevelEvent The power event level object.
+	 * @return PowerLevelEvent The power event level object.
 	 * @throws Exception 
 	 * 
 	 */
-    @RequestMapping(value = "/events", method = RequestMethod.POST)
+    @RequestMapping(value = "/power_level_events", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public Event createEvent (@RequestBody Event event) throws Exception  {
+    public PowerLevelEvent createPowerLevelEvent (@RequestBody PowerLevelEvent powerLevelEvent) 
+    		throws Exception  {
     	
-		String methodName = "createEvent";
+		String methodName = "createPowerLevelEvent";
 		String logMessage = null;
 	
 		logMessage = methodName + " ---> ";
@@ -58,18 +61,14 @@ public class LuminaireController {
 		logMessage = methodName + " --- Creating a new event ";	
 		logger.debug(logMessage);
 		
-		Event retVal = new Event();	
+		PowerLevelEvent retVal = new PowerLevelEvent();	
 		
 		// Creates the new event
 		try {
 			logMessage = methodName + " --- "
-					+ " creating the new event "
-			        + event.getId();
-			
-			////// CONTINUE ////
-			
+					+ " creating the new event ";
 			logger.debug(logMessage);
-			
+			retVal = luminaireService.createPowerLevelEvent(powerLevelEvent);
 			retVal.setRequestStatus(Payload.CREATED);
 		}
 		catch (Exception e) {
@@ -83,44 +82,5 @@ public class LuminaireController {
 		logger.debug(logMessage);
 		return retVal;
     }
-	
-	
-	
-	/**
-	 * Method to change the status of a given luminaire by setting 
-	 * the R,B, and B values.
-	 * Persist the values (input parameters) in a file.
-	 * --- improve description ...
-	 * 
-	 * @param luminaireId The id of the luminaire.
-	 * @return 
-	 */
-    @RequestMapping(value = "/luminaires", method = RequestMethod.POST)
-    @ResponseBody
-    public Luminaire setLuminaire(@RequestParam("id")   int id
-    		                    , @RequestParam("rval") int rVal
-                                , @RequestParam("gval") int gVal
-    		                    , @RequestParam("bval") int bVal)
-    {
-         
-    	
-    	String methodName = "setLuminaire";
-		String logMessage = null;
-	
-		logMessage = methodName + " ---> ";
-		logger.debug(logMessage);
-		
-    	int retVal = 0;
-    	Luminaire retLuminaire = new Luminaire();
-    	retLuminaire.setId(id);
-    	retLuminaire.setState("WORKING");
-    	// Set the R,G, and B values
-    	// Improve
-    	// 
-        //retVal = getResolver().setLuminaire(id, rVal, gVal, bVal);
-    	
-        logMessage = methodName + " <--- ";
-		logger.debug(logMessage);
-        return retLuminaire;
-    }
+
 }

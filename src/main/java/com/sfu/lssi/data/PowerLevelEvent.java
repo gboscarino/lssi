@@ -1,31 +1,24 @@
 /**
- * Luminaire
+ * Event
  */
 package com.sfu.lssi.data;
 
-
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import java.util.ArrayList;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
+import com.sfu.lssi.data.Luminaire;
 import com.sfu.lssi.data.Payload;
 
-/**
- * Sensor
- * 
- * @author Gaspare Boscarino
- */
-@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
-public class Luminaire {
+public class PowerLevelEvent extends Payload {
 	
     @JsonProperty("id")
     protected int id = 0;
 
-    @JsonProperty("power_level_percent")
-    protected int powerLevelPercent = 0;
+
+    @JsonProperty("luminaire_array")
+    protected ArrayList<Luminaire> luminaireArray;
     
     
-    public Luminaire() {}
+    public PowerLevelEvent() {}
 	
     
     // ------------------------------------------------------------------------
@@ -35,12 +28,11 @@ public class Luminaire {
     public int getId() {
         return id;
     }
-
-    @JsonProperty("power_level_percent")
-    public int getPowerLevelPercent() {
-        return powerLevelPercent;
-    }
     
+    @JsonProperty("luminaire_array")
+    public ArrayList<Luminaire> getLuminaireArray () {
+    	return luminaireArray;
+    }
     
     // ------------------------------------------------------------------------
     // Setters
@@ -49,10 +41,10 @@ public class Luminaire {
     public void setId(int sensorId) {
     	this.id = sensorId;
     }
-
-    @JsonProperty("power_level_percent")
-    public void setPowerLevelPercent(int pPowerLevelPercent) {
-    	this.powerLevelPercent = pPowerLevelPercent;
+    
+    @JsonProperty("luminaire_array")
+    public void setLuminaireArray (ArrayList<Luminaire> pLuminaireArray) {
+    	luminaireArray = pLuminaireArray;
     }
   
 }
