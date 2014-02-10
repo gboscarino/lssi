@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.sfu.lssi.data.IlluminanceSensor;
 import com.sfu.lssi.data.Payload;
 import com.sfu.lssi.data.IlluminanceSensorList;
+import com.sfu.lssi.data.PowerLevelEvent;
+import com.sfu.lssi.service.IlluminanceSensorService;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * @author
@@ -26,8 +30,11 @@ import java.io.*;
 public class IlluminanceSensorController {
 	
 	private static final Logger logger = Logger.getLogger(IlluminanceSensorController.class);
+	private IlluminanceSensorService illuminanceSensorService; 
 	
-	public IlluminanceSensorController() {
+	@Inject
+	public IlluminanceSensorController(IlluminanceSensorService pIlluminanceSensorService) {
+		this.illuminanceSensorService = pIlluminanceSensorService;
 	}
 	
 	//private IlluminanceSensorListResolver resolver;
@@ -52,9 +59,10 @@ public class IlluminanceSensorController {
 	
 		logMessage = methodName + " ---> ";
 		logger.debug(logMessage);
+		
 		IlluminanceSensorList retVal = new IlluminanceSensorList();
 		try {
-			retVal.setId(1);
+			retVal = illuminanceSensorService.getIlluminanceSensorValues(id);
 			retVal.setRequestStatus(Payload.OK);
 			logger.debug("Retrieving the sensor list data ....");
 		}

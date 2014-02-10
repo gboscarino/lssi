@@ -25,7 +25,6 @@
 	      </util:list>
 	    </property>
 	</bean>
-		
 
 
         <bean id="methodHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
@@ -45,33 +44,10 @@
         <bean id="illuminanceSensorController" class="com.sfu.lssi.controller.IlluminanceSensorController">
         </bean>
 
-<!--
-        <bean id="clientController" class="com.motbot.mtms.das.controller.ClientController">
-        </bean>
-        <bean id="productController" class="com.motbot.mtms.das.controller.ProductController">
-        </bean>
--->
-
 	<!-- Services -->
         <bean id="luminaireService" class="com.sfu.lssi.service.impl.LuminaireServiceImpl">
         </bean>
-<!--
-        <bean id="clientService" class="com.motbot.mtms.das.service.impl.ClientServiceImpl">
+        <bean id="illuminanceSensorService" class="com.sfu.lssi.service.impl.IlluminanceSensorServiceImpl">
         </bean>
-        <bean id="productService" class="com.motbot.mtms.das.service.impl.ProductServiceImpl">
-        </bean>
--->
-
-        <!-- DAOs -->
-<!--
-        <bean id="countryDao" class="com.motbot.mtms.das.data.dao.impl.JdoCountryDaoImpl">
-        </bean> 
-        <bean id="countryStateDao" class="com.motbot.mtms.das.data.dao.impl.JdoCountryStateDaoImpl">
-        </bean> 
-        <bean id="clientDao" class="com.motbot.mtms.das.data.dao.impl.JdoClientDaoImpl">
-        </bean> 
-        <bean id="productDao" class="com.motbot.mtms.das.data.dao.impl.JdoProductDaoImpl">
-        </bean> 
--->
 
 </beans>

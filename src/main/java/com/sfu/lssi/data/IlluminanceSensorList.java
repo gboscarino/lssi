@@ -4,7 +4,12 @@
  */
 package com.sfu.lssi.data;
 
+import java.util.ArrayList;
+
 import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.util.*;
+
 import com.sfu.lssi.data.Payload;
 import com.sfu.lssi.data.IlluminanceSensor;
 
@@ -18,12 +23,12 @@ public class IlluminanceSensorList extends Payload {
 	
     @JsonProperty("id")
     protected int id = 0;
- 
+    
     @JsonProperty("number_of_sensors")
     protected int numberOfSensors = 0;
     
     @JsonProperty("sensor_array")
-    protected IlluminanceSensor sensorArray[];   // The list of the sensors
+    protected ArrayList<IlluminanceSensor> sensorArray; 
     
     
     public IlluminanceSensorList() {}
@@ -42,7 +47,10 @@ public class IlluminanceSensorList extends Payload {
         return numberOfSensors;
     }
     
-    
+    @JsonProperty("sensor_array")
+    public ArrayList<IlluminanceSensor> getSensorArray() {
+        return sensorArray;
+    }
     
     
     // ------------------------------------------------------------------------
@@ -53,19 +61,14 @@ public class IlluminanceSensorList extends Payload {
     	this.id = sensorlistId;
     }
 
-   @JsonProperty("pNumberOfSensors")
+    @JsonProperty("number_of_sensors")
     public void setNumberOfSensors(int pNumberOfSensors) {
     	this.numberOfSensors = pNumberOfSensors;
     }
     
-    
-    /**
-     * Set the content of the sensor list
-     * @param 
-     */
     @JsonProperty("sensor_array")
-    public void setSensorArray (IlluminanceSensor[] pIllSensorArray) {
-        sensorArray = pIllSensorArray;
+    public void setSensorArray (ArrayList<IlluminanceSensor> pSensorArray) {
+        sensorArray = pSensorArray;
     }
   
 }

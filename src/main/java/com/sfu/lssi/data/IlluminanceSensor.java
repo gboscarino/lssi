@@ -5,6 +5,7 @@
 package com.sfu.lssi.data;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 
 /**
@@ -12,6 +13,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * 
  * @author Gaspare Boscarino
  */
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class IlluminanceSensor extends Sensor {
 	
     @JsonProperty("illuminance_lux")
@@ -31,7 +33,7 @@ public class IlluminanceSensor extends Sensor {
     // ------------------------------------------------------------------------
     // Setters
     // ------------------------------------------------------------------------
-    @JsonProperty("id")
+    @JsonProperty("illuminance_lux")
     public void setIlluminanceLux(double pIlluminanceLux) {
     	this.illuminanceLux = pIlluminanceLux;
     }
