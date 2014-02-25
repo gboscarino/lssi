@@ -41,16 +41,25 @@ public class IlluminanceSensorServiceImpl implements IlluminanceSensorService {
 		logMessage = methodName + " ---> ";
 		logger.debug(logMessage);
 		
-		//retVal.setId(sensorListId);
-		//retVal.setNumberOfSensors(4);
 		
 		// Retrieve the values of the configuration parameters
         Properties properties = new Properties();
 		try {
 			// 
-			properties.load(new FileInputStream("/opt/LSS/lssi/lssi.properties"));	
-			illuminanceValuesFile = properties.getProperty("illuminanceValuesFile");
-			illuminanceCalculatorProcess = properties.getProperty("illuminanceCalculatorProcess");
+			properties.load(new FileInputStream("/opt/LSS/lssi/lssi.properties"));
+			
+			switch (sensorListId) {
+			case 1:
+				illuminanceValuesFile = properties.getProperty("illuminanceValuesFile");
+				illuminanceCalculatorProcess = properties.getProperty("illuminanceCalculatorProcess");
+				break;
+			case 2:
+				illuminanceValuesFile = properties.getProperty("daylightIlluminanceValuesFile");
+				illuminanceCalculatorProcess = properties.getProperty("daylightIlluminanceCalculatorProcess");
+				break;
+				default:
+					logger.error(" ERROR: Invalid sensorListId");
+			}
 			logger.info(" === property (illuminanceValuesFile) = " + illuminanceValuesFile);
 			logger.info(" === property (illuminanceCalculatorProcess) = " + illuminanceCalculatorProcess);
     	} catch (IOException e) {

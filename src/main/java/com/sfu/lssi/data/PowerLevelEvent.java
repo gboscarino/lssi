@@ -4,10 +4,14 @@
 package com.sfu.lssi.data;
 
 import java.util.ArrayList;
+
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import com.sfu.lssi.data.Luminaire;
 import com.sfu.lssi.data.Payload;
 
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class PowerLevelEvent extends Payload {
 	
     @JsonProperty("id")

@@ -7,6 +7,7 @@ package com.sfu.lssi.data;
 import java.util.ArrayList;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.*;
 
@@ -19,6 +20,7 @@ import com.sfu.lssi.data.IlluminanceSensor;
  * 
  * @author Gaspare Boscarino
  */
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class IlluminanceSensorList extends Payload {
 	
     @JsonProperty("id")
